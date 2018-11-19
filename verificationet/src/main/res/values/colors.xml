@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="out_color">#FFCCCCCC</color>
+    <color name="in_color">#FFCCCCCC</color>
+    <color name="select_color">#399ce4</color>
+</resources>
