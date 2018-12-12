@@ -63,7 +63,8 @@ class VerificationChildView : View {
         mInPaint.strokeJoin = Paint.Join.ROUND
         mInPaint.color = mConfiguration.inColor
         if (mConfiguration.isShowInput) {
-            mInPaint.textSize = mConfiguration.outSize.toFloat()
+            mInPaint.textSize =
+                    if (mConfiguration.inSize.toFloat() > mConfiguration.outSize.toFloat()) mConfiguration.outSize.toFloat() else mConfiguration.inSize.toFloat()
             mInPaint.textAlign = Paint.Align.CENTER
         }
 
@@ -84,7 +85,8 @@ class VerificationChildView : View {
             mOutPaint.color = mConfiguration.outColor
         }
 
-        canvas.drawColor(Color.TRANSPARENT)
+//        canvas.drawColor(Color.TRANSPARENT)
+        canvas.drawColor(mConfiguration.inBackgroundColor)
         if (mConfiguration.outShape == VerificationEt.SQUARE) {
             val left = paddingStart
             val right = left + mConfiguration.outSize
@@ -101,7 +103,7 @@ class VerificationChildView : View {
                 val endPosition = startPosition + 1
                 //计算基线baseLine位置 baseLine = centY +[(bottom -top)/2 - bottom]
                 val fm = mInPaint.fontMetrics
-                val baseLine = center - (fm.bottom + fm.top)/2
+                val baseLine = center - (fm.bottom + fm.top) / 2
                 canvas.drawText(
                     string,
                     startPosition,

@@ -3,4 +3,6 @@
     <color name="out_color">#FFCCCCCC</color>
     <color name="in_color">#FFCCCCCC</color>
     <color name="select_color">#399ce4</color>
+    <color name="out_background_color">#00000000</color>
+    <color name="in_background_color">#00000000</color>
 </resources>

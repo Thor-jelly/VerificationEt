@@ -63,7 +63,9 @@ class VerificationEt : ViewGroup {
      * 外边框颜色
      */
     private var mOutColor: Int = 0
+//    private var mOutBackgroundColor: Int = 0
     private var mInColor: Int = 0
+    private var mInBackgroundColor: Int = 0
     private var mSelectColor: Int = 0
     private var mSpaceSize: Int = dp2px(2)
 
@@ -104,6 +106,18 @@ class VerificationEt : ViewGroup {
             )
         }
 
+        /*mOutBackgroundColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            typedArray.getColor(
+                R.styleable.VerificationEt_outBackgroundColor,
+                resources.getColor(R.color.out_background_color, context.theme)
+            )
+        } else {
+            typedArray.getColor(
+                R.styleable.VerificationEt_outBackgroundColor,
+                resources.getColor(R.color.out_background_color)
+            )
+        }*/
+
         mInColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             typedArray.getColor(
                 R.styleable.VerificationEt_inColor,
@@ -113,6 +127,18 @@ class VerificationEt : ViewGroup {
             typedArray.getColor(
                 R.styleable.VerificationEt_inColor,
                 resources.getColor(R.color.in_color)
+            )
+        }
+
+        mInBackgroundColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            typedArray.getColor(
+                R.styleable.VerificationEt_inBackgroundColor,
+                resources.getColor(R.color.in_background_color, context.theme)
+            )
+        } else {
+            typedArray.getColor(
+                R.styleable.VerificationEt_inBackgroundColor,
+                resources.getColor(R.color.in_background_color)
             )
         }
 
@@ -134,6 +160,9 @@ class VerificationEt : ViewGroup {
         }
 
         typedArray.recycle()
+
+        //设置背景色
+//        setBackgroundColor(mOutBackgroundColor)
 
         //添加子布局
         addViews()
@@ -243,6 +272,7 @@ class VerificationEt : ViewGroup {
                 mInSize,
                 mOutColor,
                 mInColor,
+                mInBackgroundColor,
                 mSelectColor,
                 mIsShow,
                 mOutStrokeWidth,
@@ -250,6 +280,7 @@ class VerificationEt : ViewGroup {
             )
             val view =
                 VerificationChildView(context, configuration, mEt)
+            //view.setBackgroundColor(mInBackgroundColor)
             addView(view)
         }
 

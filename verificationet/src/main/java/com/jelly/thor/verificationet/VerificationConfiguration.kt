@@ -14,6 +14,7 @@ data class VerificationConfiguration(
     val inSize: Int,
     val outColor: Int,
     val inColor: Int,
+    val inBackgroundColor: Int,
     val selectColor: Int,
     val isShowInput: Boolean,
     val outStrokeWidth: Int,

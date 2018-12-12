@@ -1,6 +1,6 @@
 # 自定义验证码输入框
 
-[![GitHub release](https://img.shields.io/badge/release-v1.0.0-green.svg)]()
+[![GitHub release](https://img.shields.io/badge/release-v1.0.1-green.svg)]()
 
 # 属性
 
@@ -14,12 +14,16 @@
         </attr>
         <!--外边框大小-->
         <attr name="outSize" format="dimension"/>
-        <!--内边框大小-也就是不显示数字时候有效-->
+        <!--内边框大小-->
         <attr name="inSize" format="dimension"/>
         <!--外边框颜色-->
         <attr name="outColor" format="color|reference"/>
+        <!--外部整体背景色-->
+        <!--<attr name="outBackgroundColor" format="color|reference"/>-->
         <!--内边框颜色-->
         <attr name="inColor" format="color|reference"/>
+        <!--内部整体背景色-->
+        <attr name="inBackgroundColor" format="color|reference"/>
         <!--选中颜色-->
         <attr name="selectColor" format="color|reference"/>
         <!--是否显示输入内容-->
