@@ -1,6 +1,6 @@
 # 自定义验证码输入框
 
-[![GitHub release](https://img.shields.io/badge/release-v1.0.1-green.svg)]()
+[![GitHub release](https://img.shields.io/badge/release-v1.0.2-green.svg)]()
 
 # 属性
 
@@ -19,7 +19,7 @@
         <!--外边框颜色-->
         <attr name="outColor" format="color|reference"/>
         <!--外部整体背景色-->
-        <!--<attr name="outBackgroundColor" format="color|reference"/>-->
+        <attr name="outBackgroundColor" format="color|reference"/>
         <!--内边框颜色-->
         <attr name="inColor" format="color|reference"/>
         <!--内部整体背景色-->
@@ -57,4 +57,14 @@
      * 4.获取文本内容
      */
     fun getText(): String
+    
+    /**
+     * 5.弹起键盘
+     */
+    fun showKeyboard()
+
+    /**
+     * 6.关闭软键盘
+     */
+    fun closeKeyboard()
 ```

@@ -15,7 +15,7 @@
         <!--外边框颜色-->
         <attr name="outColor" format="color|reference"/>
         <!--外部整体背景色-->
-        <!--<attr name="outBackgroundColor" format="color|reference"/>-->
+        <attr name="outBackgroundColor" format="color|reference"/>
         <!--内边框颜色-->
         <attr name="inColor" format="color|reference"/>
         <!--内部整体背景色-->

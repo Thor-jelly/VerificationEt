@@ -1,6 +1,7 @@
 package com.jelly.thor.verificationet
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.text.Editable
@@ -15,6 +16,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.core.content.ContextCompat.getSystemService
 
 
 /**
@@ -63,7 +65,7 @@ class VerificationEt : ViewGroup {
      * 外边框颜色
      */
     private var mOutColor: Int = 0
-//    private var mOutBackgroundColor: Int = 0
+    private var mOutBackgroundColor: Int = 0
     private var mInColor: Int = 0
     private var mInBackgroundColor: Int = 0
     private var mSelectColor: Int = 0
@@ -106,7 +108,7 @@ class VerificationEt : ViewGroup {
             )
         }
 
-        /*mOutBackgroundColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        mOutBackgroundColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             typedArray.getColor(
                 R.styleable.VerificationEt_outBackgroundColor,
                 resources.getColor(R.color.out_background_color, context.theme)
@@ -116,7 +118,7 @@ class VerificationEt : ViewGroup {
                 R.styleable.VerificationEt_outBackgroundColor,
                 resources.getColor(R.color.out_background_color)
             )
-        }*/
+        }
 
         mInColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             typedArray.getColor(
@@ -162,7 +164,7 @@ class VerificationEt : ViewGroup {
         typedArray.recycle()
 
         //设置背景色
-//        setBackgroundColor(mOutBackgroundColor)
+        setBackgroundColor(mOutBackgroundColor)
 
         //添加子布局
         addViews()
@@ -215,14 +217,27 @@ class VerificationEt : ViewGroup {
     }
 
     /**
-     * 弹起键盘
+     * 5.弹起键盘
      */
-    private fun showKeyboard() {
+    fun showKeyboard() {
         mEt.requestFocus()
 
         val inputMethodManager = context
-            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager? ?: return
         inputMethodManager.showSoftInput(mEt, 0)
+    }
+
+    /**
+     * 6.关闭软键盘
+     */
+    fun closeKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager ?: return
+        if (imm.isActive(mEt)) {  //i(imm.isActive())  //一直是true
+            imm.hideSoftInputFromWindow(mEt.windowToken, 0)//隐藏软键盘
+            mEt.clearFocus()
+            mEt.isSelected = false
+            return
+        }
     }
 
     /**
@@ -257,9 +272,7 @@ class VerificationEt : ViewGroup {
                 val length = s.length
                 updateChildViewSelectionStates(length, mEt.hasFocus())
 
-                if (length == mCount) {
-                    mListener?.get(s.toString())
-                }
+                mListener?.get(s.toString())
             }
         })
 
@@ -280,7 +293,6 @@ class VerificationEt : ViewGroup {
             )
             val view =
                 VerificationChildView(context, configuration, mEt)
-            //view.setBackgroundColor(mInBackgroundColor)
             addView(view)
         }
 
@@ -298,6 +310,9 @@ class VerificationEt : ViewGroup {
         return super.onTouchEvent(event)
     }
 
+    /**
+     * 跟新子view选中状态
+     */
     private fun updateChildViewSelectionStates(length: Int, hasFocus: Boolean) {
         for (i in 0 until mCount) {
             getChildAt(i).isSelected = hasFocus && i == length
